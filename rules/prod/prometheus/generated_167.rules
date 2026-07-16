@@ -1,0 +1,113 @@
+groups:
+- name: GeneratedGroup167
+  rules:
+  - alert: HostHighCpuLoad16700
+    expr: (sum by (instance) (avg by (mode, instance) (rate(node_cpu_seconds_total{mode!="idle",group="g16700"}[2m]))) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host CPU load is high on group g16700 (instance {{ $labels.instance }})
+      description: >-
+        Host CPU load is high on group g16700 (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+  - alert: HostMemoryPressure16701
+    expr: node_memory_MemAvailable_bytes{group="g16701"} / node_memory_MemTotal_bytes{group="g16701"} * 100 < 10
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host memory available is low on group g16701 (instance {{ $labels.instance }})
+      description: >-
+        Host memory available is low on group g16701 (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+  - alert: HostDiskWillFill16702
+    expr: predict_linear(node_filesystem_free_bytes{group="g16702"}[6h], 24*3600) < 0
+    for: 1h
+    labels:
+      severity: warning
+    annotations:
+      summary: Host disk on group g16702 will fill in 24h (instance {{ $labels.instance }})
+      description: >-
+        Host disk on group g16702 will fill in 24h (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+  - alert: HostNetworkErrors16703
+    expr: rate(node_network_receive_errs_total{group="g16703"}[2m]) + rate(node_network_transmit_errs_total{group="g16703"}[2m]) > 16703
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host network errors on group g16703 (instance {{ $labels.instance }})
+      description: >-
+        Host network errors on group g16703 (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+  - alert: HostUnusualDiskReadRate16704
+    expr: sum by (instance) (rate(node_disk_read_bytes_total{group="g16704"}[2m])) / (1024*1024) > 167040
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host unusual disk read rate on group g16704 (instance {{ $labels.instance }})
+      description: >-
+        Host unusual disk read rate on group g16704 (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+  - alert: HostSwapUsage16705
+    expr: (1 - (node_memory_SwapFree_bytes{group="g16705"} / node_memory_SwapTotal_bytes{group="g16705"})) * 100 > 50
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host swap usage is high on group g16705 (instance {{ $labels.instance }})
+      description: >-
+        Host swap usage is high on group g16705 (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+  - alert: HostContextSwitching16706
+    expr: rate(node_context_switches_total{group="g16706"}[5m]) > 16706000
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host context switching is high on group g16706 (instance {{ $labels.instance }})
+      description: >-
+        Host context switching is high on group g16706 (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+  - alert: HostClockSkew16707
+    expr: abs(node_timex_offset_seconds{group="g16707"}) > 0.05
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host clock skew detected on group g16707 (instance {{ $labels.instance }})
+      description: >-
+        Host clock skew detected on group g16707 (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+  - alert: HostOOMKills16708
+    expr: increase(node_vmstat_oom_kill{group="g16708"}[5m]) > 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host OOM kill detected on group g16708 (instance {{ $labels.instance }})
+      description: >-
+        Host OOM kill detected on group g16708 (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+  - alert: HostFiledescriptorsExhaustion16709
+    expr: node_filefd_allocated{group="g16709"} / node_filefd_maximum{group="g16709"} * 100 > 90
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host file descriptors near exhaustion on group g16709 (instance {{ $labels.instance }})
+      description: >-
+        Host file descriptors near exhaustion on group g16709 (instance {{ $labels.instance }}).
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
