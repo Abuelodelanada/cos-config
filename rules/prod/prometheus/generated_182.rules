@@ -2,7 +2,7 @@ groups:
 - name: GeneratedGroup182
   rules:
   - alert: HostHighCpuLoad18200
-    expr: (sum by (instance) (avg by (mode, instance) (rate(node_cpu_seconds_total{mode!="idle",group="g18200"}[2m]))) * 100) > 80
+    expr: (sum by (instance) (avg by (mode, instance) (rate(node_cpu_seconds_total{%%juju_topology%%,mode!="idle",group="g18200"}[2m]))) * 100) > 80
     for: 5m
     labels:
       severity: warning
@@ -13,7 +13,7 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
   - alert: HostMemoryPressure18201
-    expr: node_memory_MemAvailable_bytes{group="g18201"} / node_memory_MemTotal_bytes{group="g18201"} * 100 < 10
+    expr: node_memory_MemAvailable_bytes{%%juju_topology%%,group="g18201"} / node_memory_MemTotal_bytes{%%juju_topology%%,group="g18201"} * 100 < 10
     for: 5m
     labels:
       severity: critical
@@ -24,7 +24,7 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
   - alert: HostDiskWillFill18202
-    expr: predict_linear(node_filesystem_free_bytes{group="g18202"}[6h], 24*3600) < 0
+    expr: predict_linear(node_filesystem_free_bytes{%%juju_topology%%,group="g18202"}[6h], 24*3600) < 0
     for: 1h
     labels:
       severity: warning
@@ -35,7 +35,7 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
   - alert: HostNetworkErrors18203
-    expr: rate(node_network_receive_errs_total{group="g18203"}[2m]) + rate(node_network_transmit_errs_total{group="g18203"}[2m]) > 18203
+    expr: rate(node_network_receive_errs_total{%%juju_topology%%,group="g18203"}[2m]) + rate(node_network_transmit_errs_total{%%juju_topology%%,group="g18203"}[2m]) > 18203
     for: 10m
     labels:
       severity: warning
@@ -46,7 +46,7 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
   - alert: HostUnusualDiskReadRate18204
-    expr: sum by (instance) (rate(node_disk_read_bytes_total{group="g18204"}[2m])) / (1024*1024) > 182040
+    expr: sum by (instance) (rate(node_disk_read_bytes_total{%%juju_topology%%,group="g18204"}[2m])) / (1024*1024) > 182040
     for: 5m
     labels:
       severity: warning
@@ -57,7 +57,7 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
   - alert: HostSwapUsage18205
-    expr: (1 - (node_memory_SwapFree_bytes{group="g18205"} / node_memory_SwapTotal_bytes{group="g18205"})) * 100 > 50
+    expr: (1 - (node_memory_SwapFree_bytes{%%juju_topology%%,group="g18205"} / node_memory_SwapTotal_bytes{%%juju_topology%%,group="g18205"})) * 100 > 50
     for: 10m
     labels:
       severity: warning
@@ -68,7 +68,7 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
   - alert: HostContextSwitching18206
-    expr: rate(node_context_switches_total{group="g18206"}[5m]) > 18206000
+    expr: rate(node_context_switches_total{%%juju_topology%%,group="g18206"}[5m]) > 18206000
     for: 5m
     labels:
       severity: warning
@@ -79,7 +79,7 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
   - alert: HostClockSkew18207
-    expr: abs(node_timex_offset_seconds{group="g18207"}) > 0.05
+    expr: abs(node_timex_offset_seconds{%%juju_topology%%,group="g18207"}) > 0.05
     for: 10m
     labels:
       severity: warning
@@ -90,7 +90,7 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
   - alert: HostOOMKills18208
-    expr: increase(node_vmstat_oom_kill{group="g18208"}[5m]) > 0
+    expr: increase(node_vmstat_oom_kill{%%juju_topology%%,group="g18208"}[5m]) > 0
     for: 0m
     labels:
       severity: critical
@@ -101,7 +101,7 @@ groups:
           VALUE = {{ $value }}
           LABELS = {{ $labels }}
   - alert: HostFiledescriptorsExhaustion18209
-    expr: node_filefd_allocated{group="g18209"} / node_filefd_maximum{group="g18209"} * 100 > 90
+    expr: node_filefd_allocated{%%juju_topology%%,group="g18209"} / node_filefd_maximum{%%juju_topology%%,group="g18209"} * 100 > 90
     for: 5m
     labels:
       severity: critical
