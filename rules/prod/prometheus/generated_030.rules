@@ -1,5 +1,5 @@
 groups:
-- name: GeneratedGroup29
+- name: GeneratedGroup30
   rules:
   - alert: HostHighCpuLoad2900
     expr: (sum by (instance) (avg by (mode, instance) (rate(node_cpu_seconds_total{mode!="idle",group="g3000"}[2m]))) * 100) > 80
